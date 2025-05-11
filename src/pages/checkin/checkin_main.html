@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Checkin Main Page</title>
+  <link rel="stylesheet" href=".././../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <script src='.././../bower_components/bootstrap/dist/js/bootstrap.bundle.js'></script>
+  <script src='.././../bower_components/jquery/dist/jquery.min.js'></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="text-center">
+      <img src=".././../src/images/rising-sun-martial-arts-logo.png" class="mx-auto">
+    </div>
+
+
+
+    <div class="text-center">
+      <h1 >This page is using Bootstrap and jQuery!</h1>
+      <p id="info"></p>
+    </div>
+
+    <div class="col-md-8 order-md-1 mx-auto">
+      <h4 class="mb-3">Please checkin before starting class.</h4>
+      <form class="needs-validation" >
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="badgeNumber_lbl" class="display-inline">Badge number</label>
+            <input type="text" class="form-control display-inline" id="badgeNumberInp" placeholder="" value="">
+          </div>
+      </form>
+      <br>
+      <label id="checkinLbl">Waiting ...</label>
+    </div>
+
+    <script src="../scripts/checkin_renderer.js"></script>
+
+  </div>
+</body>
+
+</html>

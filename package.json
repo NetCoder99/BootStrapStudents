@@ -1,0 +1,17 @@
+{
+  "name": "bootstrapstudents",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ./main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^36.2.0",
+    "jquery": "^3.7.1",
+    "webix": "^11.1.0"
+  }
+}
