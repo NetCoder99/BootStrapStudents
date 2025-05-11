@@ -63,7 +63,7 @@ function createStudentsWindow() {
     console.log(`set-title was clicked: ${JSON.stringify(title)}`)
   });
 
-  const validateStudentData = require('./src/pages/students/student_validate')
+  const validateStudentObj  = require('./src/pages/students/student_validate')
   const updateStudentsData  = require('./src/data/students_procs')
 
   ipcMain.on('saveStudentData', (event, studentData) => {
@@ -72,13 +72,22 @@ function createStudentsWindow() {
     updateStudentsData(studentData);
 
     setTimeout(() => {
-      result = validateStudentData(studentData);
+      result = validateStudentObj.validateStudentData(studentData);
       console.log(`saveStudentData was validated: ${JSON.stringify(result)}`);
       studentWindow.webContents.send('saveStudentDataResult', result);
     }, 500);    
 
 
   });
+
+  ipcMain.on('searchByBadge', (event, badgeData) => {
+    console.log(`searchByBadge was clicked: ${JSON.stringify(badgeData.badgeNumber)}`);
+    result = validateStudentObj.isBadgeNumberValid(badgeData.badgeNumber);
+    console.log(`searchByBadge result: ${JSON.stringify(result)}`);
+    studentWindow.webContents.send('searchByBadgeResult', result);
+  });
+
+
 }  
 
 app.whenReady().then(() => {

@@ -38,4 +38,7 @@ function isNameFieldValid(inpField, fieldName) {
   }
 }
 
-module.exports = validateStudentData;
+module.exports = {
+  validateStudentData : validateStudentData, 
+  isBadgeNumberValid  : isBadgeNumberValid
+};

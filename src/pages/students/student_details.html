@@ -28,11 +28,11 @@
         
           <div class="row mb-3">
             <div class="col-sm-1"></div>
-              <label for="badgeNumber" class="col-sm-4 col-form-label fw-bold">Badge Number<span class="">(Required)</span></label>
-            <div class="col-sm-6">
+            <div class="col-sm-10">
+              <label for="badgeNumber" class="col-form-label d-inline-block fw-bold">Badge Number:</label>
               <input type="number" class="form-control d-inline-block w-50" id="badgeNumber" autofocus placeholder="">
               <button id="searchButton" class="btn btn-success btn-sm ml-3" type="button">Search</button>
-              <div id='badgeNumber_error'  class="col text-end text-danger"></div>
+              <div id='badgeNumber_error'  class="col text-start text-danger"></div>
             </div>
             <div class="col-sm-1"></div>
           </div>
@@ -41,12 +41,12 @@
           <div class="col-md-6 mb-3">
             <label for="firstName">First name</label>
             <input type="text" class="form-control" id="firstName" placeholder="" value="">
-            <div id='firstName_error'  class="col text-end text-danger"></div>
+            <div id='firstName_error'  class="col text-start text-danger"></div>
           </div>
           <div class="col-md-6 mb-3">
             <label for="lastName">Last name</label>
             <input type="text" class="form-control" id="lastName" placeholder="" value="">
-            <div id='lastName_error'  class="col text-end text-danger"></div>
+            <div id='lastName_error'  class="col text-start text-danger"></div>
           </div>
         </div>
     

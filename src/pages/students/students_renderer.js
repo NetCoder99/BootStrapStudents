@@ -26,6 +26,50 @@ function resetBadgeNumber(inpValue) {
 //  console.log(`Hello, ${name}!`);
 }
 
+//-------------------------------------------------------------------
+// invoked by the search button click event
+//-------------------------------------------------------------------
+const searchButton = document.getElementById('searchButton')
+searchButton.addEventListener('click', () => {
+  console.log('Search button was clicked')
+  badgeNumber = {
+    'badgeNumber' : badgeNumber.value,
+  }
+  console.log(`studentData: ${JSON.stringify(badgeNumber)}`);
+  setFormEnabled(document.getElementById('formStudentData'), true);
+  window.electronAPI.searchByBadge(badgeNumber);
+})
+//-------------------------------------------------------------------
+// invoked by the main ipc emit event 
+//-------------------------------------------------------------------
+window.electronAPI.searchByBadgeResult((result) => {
+  try {
+    console.log(`searchByBadgeResult was activated: ${JSON.stringify(result)}`)
+    setInputFormStatus(
+      document.getElementById('badgeNumber'), 
+      document.getElementById('badgeNumber_error'),
+      result);
+    // setInputFormStatus(
+    //   document.getElementById('firstName'), 
+    //   document.getElementById('firstName_error'),
+    //   result.firstName);
+    // setInputFormStatus(
+    //     document.getElementById('lastName'), 
+    //     document.getElementById('lastName_error'),
+    //     result.lastName);
+    } catch (error) {
+    console.error("An error occurred:", error);
+  } finally {
+    setFormEnabled(document.getElementById('formStudentData'), false);
+  }
+})
+
+
+
+
+
+
+
 
 //-------------------------------------------------------------------
 // invoked by the save button click event
@@ -49,16 +93,10 @@ saveButton.addEventListener('click', () => {
 window.electronAPI.saveStudentDataResult((result) => {
   console.log(`saveStudentDataResult was activated: ${JSON.stringify(result)}`)
   try {
-    if (result.badgeNumber.status === 'err') {
-      document.getElementById('badgeNumber_error').innerHTML = result.badgeNumber.msg;
-      document.getElementById('badgeNumber').classList.add("is-invalid"); 
-      document.getElementById('badgeNumber').focus(); 
-    }
-    else {
-      document.getElementById('badgeNumber_error').innerHTML = "";
-      document.getElementById('badgeNumber').classList.remove("is-invalid"); 
-      document.getElementById('badgeNumber').classList.add("is-valid"); 
-    }
+    setInputFormStatus(
+      document.getElementById('badgeNumber'), 
+      document.getElementById('badgeNumber_error'),
+      result.firstName);
     setInputFormStatus(
       document.getElementById('firstName'), 
       document.getElementById('firstName_error'),

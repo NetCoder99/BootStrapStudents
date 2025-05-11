@@ -7,8 +7,10 @@ contextBridge.exposeInMainWorld('versions', {
 })
 
 contextBridge.exposeInMainWorld('electronAPI', {
-  asyncMessage     : (callback)    => ipcRenderer.on('asynchronous-message', (_event, value) => callback(value)),
-  saveStudentData  : (studentData) => ipcRenderer.send('saveStudentData', studentData),
   setTitle         : (title)       => ipcRenderer.send('set-title', title),  
+  asyncMessage     : (callback)    => ipcRenderer.on('asynchronous-message', (_event, value) => callback(value)),
+  saveStudentData       : (studentData) => ipcRenderer.send('saveStudentData', studentData),
   saveStudentDataResult : (callback)    => ipcRenderer.on('saveStudentDataResult', (_event, value) => callback(value)),
+  searchByBadge         : (badgeData) => ipcRenderer.send('searchByBadge', badgeData),
+  searchByBadgeResult   : (callback)    => ipcRenderer.on('searchByBadgeResult', (_event, value) => callback(value)),
 })
