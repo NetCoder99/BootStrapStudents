@@ -7,5 +7,8 @@ contextBridge.exposeInMainWorld('versions', {
 })
 
 contextBridge.exposeInMainWorld('electronAPI', {
-  asyncMessage     : (callback) => ipcRenderer.on('asynchronous-message', (_event, value) => callback(value)),
+  asyncMessage     : (callback)    => ipcRenderer.on('asynchronous-message', (_event, value) => callback(value)),
+  saveStudentData  : (studentData) => ipcRenderer.send('saveStudentData', studentData),
+  setTitle         : (title)       => ipcRenderer.send('set-title', title),  
+  saveStudentDataResult : (callback)    => ipcRenderer.on('saveStudentDataResult', (_event, value) => callback(value)),
 })
