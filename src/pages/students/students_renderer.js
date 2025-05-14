@@ -96,25 +96,25 @@ window.electronAPI.saveStudentDataResult((result) => {
     setInputFormStatus(
       document.getElementById('badgeNumber'), 
       document.getElementById('badgeNumber_error'),
-      result.firstName);
+      result.badgeNumber);
     setInputFormStatus(
       document.getElementById('firstName'), 
       document.getElementById('firstName_error'),
       result.firstName);
     setInputFormStatus(
-        document.getElementById('lastName'), 
-        document.getElementById('lastName_error'),
-        result.lastName);
-  
-    } catch (error) {
+      document.getElementById('lastName'), 
+      document.getElementById('lastName_error'),
+      result.lastName);
+  } catch (error) {
     console.error("An error occurred:", error);
   } finally {
     setFormEnabled(document.getElementById('formStudentData'), false);
+    setFocusedField(result);
   }
 })
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-function setInputFormStatus(form_element, err_element, field_status) {
+function setInputFormStatus(form_element, err_element, field_status, focus_field) {
   if (field_status.status === 'err') {
     err_element.innerHTML = field_status.msg;
     form_element.classList.add("is-invalid"); 
@@ -126,6 +126,24 @@ function setInputFormStatus(form_element, err_element, field_status) {
     form_element.classList.add("is-valid"); 
   }
 }
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+function setFocusedField(result) {
+  if (result.badgeNumber.status === 'err') {
+    document.getElementById('badgeNumber').focus();
+    return;
+  }
+  if (result.firstName.status === 'err') {
+    document.getElementById('firstName').focus();
+    return;
+  }
+  if (result.lastName.status === 'err') {
+    document.getElementById('lastName').focus();
+    return;
+  }
+
+}
+
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 function setFormEnabled(form, isDisabled) {

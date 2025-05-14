@@ -4,10 +4,8 @@ const path  = require('node:path')
 const $     = require('jquery') 
 
 
-// let winMain 
-// let mainMenuObj = require('./src/scripts/mainMenu')
-// let mainMenu = Menu.buildFromTemplate(mainMenuObj)
-
+const {createStudentsTable} = require('./src/data/students_procs') ;
+createStudentsTable();
 
 //---------------------------------------------------------------
 let mainWindow
@@ -47,6 +45,8 @@ function createStudentsWindow() {
   //Menu.setApplicationMenu(fileMenu)
   studentWindow.loadFile('./src/pages/students/student_details.html')
   studentWindow.webContents.openDevTools()
+
+
   app.on('prevPicture', () => {
     console.log('prevPicture was clicked')
     studentWindow.webContents.send('asynchronous-message', {'menu-clicked': 'prevPicture'});
@@ -63,19 +63,26 @@ function createStudentsWindow() {
     console.log(`set-title was clicked: ${JSON.stringify(title)}`)
   });
 
-  const validateStudentObj  = require('./src/pages/students/student_validate')
-  const updateStudentsData  = require('./src/data/students_procs')
-
+  const validateStudentObj    = require('./src/pages/students/student_validate')
+  const {updateStudentsData}  = require('./src/data/students_procs')
   ipcMain.on('saveStudentData', (event, studentData) => {
     console.log(`saveStudentData was clicked: ${JSON.stringify(studentData)}`);
-
-    updateStudentsData(studentData);
-
-    setTimeout(() => {
-      result = validateStudentObj.validateStudentData(studentData);
-      console.log(`saveStudentData was validated: ${JSON.stringify(result)}`);
-      studentWindow.webContents.send('saveStudentDataResult', result);
-    }, 500);    
+    result = validateStudentObj.validateStudentData(studentData);
+    if (validateStudentObj.isOkToUpdate(result)) {
+      updateStudentsData(studentData);
+      result['saveMessage'] = 'Student data was updated';
+      setTimeout(() => {
+        console.log(`saveStudentData was saved to database: ${JSON.stringify(result)}`);
+        studentWindow.webContents.send('saveStudentDataResult', result);
+      }, 500);    
+    }
+    else {
+      setTimeout(() => {
+        console.log(`saveStudentData failed validation: ${JSON.stringify(result)}`);
+        studentWindow.webContents.send('saveStudentDataResult', result);
+        result['saveMessage'] = 'Student data was not updated';
+      }, 500);    
+    }
 
 
   });
@@ -99,7 +106,7 @@ app.whenReady().then(() => {
   createStudentsWindow()
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
-      createMainWindow()
+      createStudentsWindow()
     }
   })
 })

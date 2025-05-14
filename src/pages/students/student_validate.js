@@ -38,7 +38,20 @@ function isNameFieldValid(inpField, fieldName) {
   }
 }
 
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// any field error will prevent updating the database 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function isOkToUpdate(result) {
+  for (const [key, value] of Object.entries(result)) {
+    console.log(`Key: ${key}, Value: ${value.status}`);
+    if (value.status === 'err') { return false; }
+  }
+  return true;
+}
+
 module.exports = {
-  validateStudentData : validateStudentData, 
-  isBadgeNumberValid  : isBadgeNumberValid
+  validateStudentData, 
+  isBadgeNumberValid,
+  isOkToUpdate
 };
