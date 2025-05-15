@@ -1,12 +1,6 @@
 var fs = require('fs');
 const sqlite3 = require('sqlite3');
 const db_location = './src/data/students.db'
-// const db_conn     = new sqlite3.Database(db_location);
-
-//---------------------------------------------------------------
-function createSqliteDB() {
-  const db = new sqlite3.Database('./src/data/students.db');
-}
 
 //---------------------------------------------------------------
 function createStudentsTable() {
@@ -46,30 +40,30 @@ function updateStudentsData(studentData) {
   ); 
 }
 
-// //---------------------------------------------------------------
-// function saveStudentDataToDb(studentWindow, studentData) {
-//   console.log(`saveStudentData was clicked: ${JSON.stringify(studentData)}`);
-//   result = this.validateStudentData(studentData);
-//   if (validateStudentObj.isOkToUpdate(result)) {
-//     this.updateStudentsData(studentData);
-//     result['saveMessage'] = 'Student data was updated';
-//     setTimeout(() => {
-//       console.log(`saveStudentData was saved to database: ${JSON.stringify(result)}`);
-//       studentWindow.webContents.send('saveStudentDataResult', result);
-//     }, 500);    
-//   }
-//   else {
-//     setTimeout(() => {
-//       console.log(`saveStudentData failed validation: ${JSON.stringify(result)}`);
-//       studentWindow.webContents.send('saveStudentDataResult', result);
-//       result['saveMessage'] = 'Student data was not updated';
-//     }, 500);    
-//   }
-// }
+//---------------------------------------------------------------
+function searchStudentsData(badgeData, callback) {
+  console.log(`updateStudentsData was called: ${JSON.stringify(badgeData)}`);
+  const db = new sqlite3.Database(db_location);
+  db.get("select badgeNumber,firstName,lastName from students where badgeNumber = ?", [badgeData.badgeNumber], (err, row) => {
+    if (err) {
+      console.error({'status': 'err', 'msg': err.message});
+      return callback({'status': 'err', 'msg': err.message});
+    } else if (row) {
+      console.log('Retrieved row:', row);
+      row.status = "ok";
+      row.msg = "Student data found."
+      return callback(row);
+    } else {
+      console.log({'status': 'err', 'msg': 'No students found for that badge number'});
+      return callback({'status': 'err', 'msg': 'No students found for that badge number'});
+    }
+  });
+  db.close();
+}
 
 //---------------------------------------------------------------
 module.exports = {
   createStudentsTable,
   updateStudentsData,
-  //saveStudentDataToDb
+  searchStudentsData
 };

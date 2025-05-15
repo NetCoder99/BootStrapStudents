@@ -30,9 +30,9 @@
             <div class="col-sm-1"></div>
             <div class="col-sm-10">
               <label for="badgeNumber" class="col-form-label d-inline-block fw-bold">Badge Number:</label>
-              <input type="number" class="form-control d-inline-block w-50" id="badgeNumber" autofocus placeholder="">
+              <input type="number" class="form-control d-inline-block w-50" id="badgeNumber" onfocus="this.select()" autofocus placeholder="">
               <button id="searchButton" class="btn btn-success btn-sm ml-3" type="button">Search</button>
-              <div id='badgeNumber_error'  class="col text-start text-danger"></div>
+              <div id='badgeNumber_error'  class="col fw-bold text-start text-danger">&nbsp</div>
             </div>
             <div class="col-sm-1"></div>
           </div>
@@ -52,7 +52,7 @@
     
         <div class="mb-3">
           <label for="email">Email <span class="text-muted">(Optional)</span></label>
-          <input type="email" class="form-control" id="email" placeholder="">
+          <input type="email" class="form-control" id="email" placeholder="" disabled>
           <div class="invalid-feedback">
             Please enter a valid email address.
           </div>
@@ -60,7 +60,7 @@
     
         <div class="mb-3">
           <label for="phoneNumber">Phone Number <span class="text-muted">(Optional)</span></label>
-          <input type="tel" class="form-control" id="phoneNumber" placeholder="">
+          <input type="tel" class="form-control" id="phoneNumber" placeholder="" disabled>
           <div class="invalid-feedback">
             Please enter a valid phone number.
           </div>
@@ -68,7 +68,7 @@
 
         <div class="mb-3">
           <label for="address">Address</label>
-          <input type="text" class="form-control" id="address" placeholder="1234 Main St">
+          <input type="text" class="form-control" id="address" placeholder="1234 Main St" disabled>
           <div class="invalid-feedback">
             Please enter your shipping address.
           </div>
@@ -76,13 +76,13 @@
     
         <div class="mb-3">
           <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-          <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+          <input type="text" class="form-control" id="address2" placeholder="Apartment or suite" disabled>
         </div>
     
         <div class="row">
           <div class="col-md-5 mb-3">
             <label for="country">Country</label>
-            <select class="form-select d-block w-100" id="country" required>
+            <select class="form-select d-block w-100" id="country" disabled>
               <option value="">Choose...</option>
               <option>United States</option>
             </select>
@@ -92,7 +92,7 @@
           </div>
           <div class="col-md-4 mb-3">
             <label for="state">State</label>
-            <select class="form-select d-block w-100" id="state" required>
+            <select class="form-select d-block w-100" id="state" disabled>
               <option value="">Choose...</option>
               <option>Arizona</option>
               <option>California</option>
@@ -103,7 +103,7 @@
           </div>
           <div class="col-md-3 mb-3">
             <label for="zip">Zip</label>
-            <input type="text" class="form-control" id="zip" placeholder="">
+            <input type="text" class="form-control" id="zip" placeholder="" disabled>
             <div class="invalid-feedback">
               Zip code required.
             </div>
