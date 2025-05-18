@@ -9,3 +9,7 @@ input:invalid {
 input:valid {
   border: 2px solid green;
 }
+
+.main_form {
+  background-color: #f2ffe6;
+}

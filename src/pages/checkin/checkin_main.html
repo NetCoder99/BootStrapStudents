@@ -4,10 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Checkin Main Page</title>
-  <link rel="stylesheet" href="../../../bower_components/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="../../styles/main.css" />
-  <script src='../../../bower_components/bootstrap/dist/js/bootstrap.bundle.js'></script>
-  <script src='../../../bower_components/jquery/dist/jquery.min.js'></script>
+  <link rel="stylesheet" href="./../../../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+  <script src='./../../../node_modules/bootstrap/dist/js/bootstrap.js'></script>
+  <script src='./../../../node_modules/jquery/dist/jquery.min.js'></script>
 </head>
 
 <body>
@@ -16,26 +16,25 @@
       <img src="../../images/rising-sun-martial-arts-logo.png" class="mx-auto">
     </div>
 
+      <!-- vh-100 here-->
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 mx-auto text-center">
+          <h2 class="my-5 bg-secondary-subtle rounded-4 p-4">Welcome to Rising Sun Martial Arts</h2></div>
+        <div class="col-md-2"></div>
 
+        
+        <div class="col-md-3"></div>
+        <div class="col-md-6  mx-auto border rounded-5 ps-5 pt-4 pb-3 main_form">
+          <h4> Please checkin before starting class...</h4>
+          <form class="">
+            <input type="text" class="form-control" id="badgeNumberInp" style="width: 12rem;">
+          </form>
+          <p id="checkinLbl" class="fw-bold">Waiting for checkin ...</p>
+        </div>
+        <div class="col-md-3"></div>
 
-    <div class="text-center">
-      <h1 >This page is using Bootstrap and jQuery!</h1>
-      <p id="info"></p>
-    </div>
-
-    <div class="col-md-8 order-md-1 mx-auto">
-      <h4 class="mb-3">Please checkin before starting class.</h4>
-      <form class="needs-validation" >
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label for="badgeNumber_lbl" class="display-inline">Badge number</label>
-            <input type="text" class="form-control display-inline" id="badgeNumberInp" placeholder="" value="">
-          </div>
-      </form>
-      <br>
-      <label id="checkinLbl">Waiting ...</label>
-    </div>
-
+      </div>  
     <script src="checkin_renderer.js"></script>
 
   </div>

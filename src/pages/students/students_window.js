@@ -25,7 +25,7 @@ function createStudentsWindow() {
 
   let htmlPath  = path.join(root_dir, 'src', 'pages', 'students', 'student_details.html');
   studentWindow.loadFile(htmlPath)
-  //studentWindow.webContents.openDevTools()
+  studentWindow.webContents.openDevTools()
 
   // app.on('prevPicture', () => {
   //   console.log('prevPicture was clicked')

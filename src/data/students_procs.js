@@ -1,6 +1,6 @@
 var fs = require('fs');
 const sqlite3 = require('sqlite3');
-const db_location = './src/data/students.db'
+const db_location = './src/data/attendance.db'
 
 //---------------------------------------------------------------
 function createStudentsTable() {
@@ -38,11 +38,13 @@ function updateStudentsData(studentData) {
       }
     }
   ); 
+  db.close();
 }
 
 //---------------------------------------------------------------
 function searchStudentsData(badgeData, callback) {
-  console.log(`updateStudentsData was called: ${JSON.stringify(badgeData)}`);
+  console.log(`searchStudentsData was called: ${JSON.stringify(badgeData)}`);
+  console.log(`badgeNumber: ${badgeData.badgeNumber}`);
   const db = new sqlite3.Database(db_location);
   db.get("select badgeNumber,firstName,lastName from students where badgeNumber = ?", [badgeData.badgeNumber], (err, row) => {
     if (err) {
@@ -54,8 +56,8 @@ function searchStudentsData(badgeData, callback) {
       row.msg = "Student data found."
       return callback(row);
     } else {
-      console.log({'status': 'err', 'msg': 'No students found for that badge number'});
-      return callback({'status': 'err', 'msg': 'No students found for that badge number'});
+      console.log({'status': 'err', 'msg': 'No students found for that badge number', 'badgeNumber': badgeData.badgeNumber});
+      return callback({'status': 'err', 'msg': 'No students found for that badge number', 'badgeNumber': badgeData.badgeNumber});
     }
   });
   db.close();
