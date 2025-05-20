@@ -15,10 +15,11 @@ const createStudentsWindow = require('./src/pages/students/students_window') ;
 
 app.whenReady().then(() => {
   console.log(`whenReady activated`)
+  createStudentsWindow();
   createCheckinWindow();
-  //createStudentsWindow();
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
+      createStudentsWindow();
       createCheckinWindow();
     }
   })
